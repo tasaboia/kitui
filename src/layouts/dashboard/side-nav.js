@@ -118,10 +118,30 @@ export const SideNav = (props) => {
     </Scrollbar>
   );
 
+  if (lgUp) {
+    return (
+      <Drawer
+        anchor="left"
+        open
+        PaperProps={{
+          sx: {
+            backgroundColor: "ThreeDFace",
+            color: "#000",
+            width: 280,
+          },
+        }}
+        variant="permanent"
+      >
+        {content}
+      </Drawer>
+    );
+  }
+
   return (
     <Drawer
       anchor="left"
-      open
+      onClose={onClose}
+      open={open}
       PaperProps={{
         sx: {
           backgroundColor: "ThreeDFace",
@@ -129,7 +149,8 @@ export const SideNav = (props) => {
           width: 280,
         },
       }}
-      variant="permanent"
+      sx={{ zIndex: (theme) => theme.zIndex.appBar + 100 }}
+      variant="temporary"
     >
       {content}
     </Drawer>
