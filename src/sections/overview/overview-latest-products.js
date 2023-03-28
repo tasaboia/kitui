@@ -1,4 +1,8 @@
 import { formatDistanceToNow } from "date-fns";
+
+import format from "date-fns/format";
+import ptBR from "date-fns/locale/pt-BR";
+import parse from "date-fns/parse";
 import PropTypes from "prop-types";
 import ArrowRightIcon from "@heroicons/react/24/solid/ArrowRightIcon";
 import EllipsisVerticalIcon from "@heroicons/react/24/solid/EllipsisVerticalIcon";
@@ -16,7 +20,6 @@ import {
   ListItemText,
   SvgIcon,
 } from "@mui/material";
-
 export const OverviewLatestProducts = (props) => {
   const { products = [], sx } = props;
 
@@ -26,7 +29,7 @@ export const OverviewLatestProducts = (props) => {
       <List>
         {products.map((product, index) => {
           const hasDivider = index < products.length - 1;
-          const ago = formatDistanceToNow(product.updatedAt);
+          const ago = formatDistanceToNow(product.updatedAt, { locale: ptBR });
 
           return (
             <ListItem divider={hasDivider} key={product.id}>
@@ -55,7 +58,7 @@ export const OverviewLatestProducts = (props) => {
               <ListItemText
                 primary={product.name}
                 primaryTypographyProps={{ variant: "subtitle1" }}
-                secondary={`Updated ${ago} ago`}
+                secondary={`Retirado a ${ago} atrás `}
                 secondaryTypographyProps={{ variant: "body2" }}
               />
               <IconButton edge="end">
